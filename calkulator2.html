@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calkulator</title>
+<meta charset="UTF-8">
+
+<script>
+
+function plus(){
+var a=+(document.getElementById("skaitlis1").value);
+var b=+(document.getElementById("skaitlis2").value);
+var c;
+c=a+b;
+document.getElementById("atbilde").innerHTML=c;
+}
+function minus(){
+var a=+(document.getElementById("skaitlis1").value);
+var b=+(document.getElementById("skaitlis2").value);
+var c;
+c=a-b;
+document.getElementById("atbilde").innerHTML=c;
+}
+
+function del(){
+var a=+(document.getElementById("skaitlis1").value);
+var b=+(document.getElementById("skaitlis2").value);
+var c;
+c=a/b;
+document.getElementById("atbilde").innerHTML=c;
+}
+
+function reiz(){
+var a=+(document.getElementById("skaitlis1").value);
+var b=+(document.getElementById("skaitlis2").value);
+var c;
+c=a*b;
+document.getElementById("atbilde").innerHTML=c;
+}
+</script>
+</head>
+<body>
+
+<p align="center"><input type="sumbit" id="skaitlis1" text="0" />
+<align="center"><input type="sumbit" id="skaitlis2" text="0" /></p>
+
+<div align="center"><button onclick="plus();">+</button></div>
+<div align="center"><button onclick="minus();">-</button><br></div>
+<div align="center"><button onclick="del();">/</button><br></div> 
+<div align="center"><button onclick="reiz();">*</button><br></div>
+<p align="center" id="atbilde" /><input id="atbilde" value="0" /></p>
+
+</body>
+</html>
