@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="lv" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="test.css">
+    <title></title>
+  </head>
+  <body>
+    <div class="slider">
+      <input type="range" name="" value="0.1" max="100" min="0.1" step ="0.1" id="speed" onchange="speed_change()">
+      <button onclick="speed_check()">Check</button>
+      <p>Ātrums v = <span id="speed_value"></span></p>
+      <input type="range" name="" value="0.1" max="100" min="5" step ="0.1" id="distance" onchange="distance_change()">
+      <button onclick="distance_check()">Check</button>
+      <p>Attālums s = <span id="distance_value"></span></p>
+      <input type="range" name="" value="0.1" max="100" min="0.1" step ="0.1" id="time" onchange="time_change()">
+      <button onclick="time_check()">Check</button>
+      <p>Laiks t = <span id="time_value"></span></p>
+      <button onclick="graph()">Graph</button>
+    </div>
+
+  <canvas id="myCanvas" width="100" height="100" style="border:3px solid #d3d3d3;">
+  </canvas>
+   <canvas id="myCanvas" width="100" height="100" style="border:3px solid #d3d3d3;">
+  </canvas>
+  </body>
+
+  <script>
+  //Mainīgie
+  let speed = document.getElementById("speed");
+  let speed_value = document.getElementById("speed_value");
+  let distance = document.getElementById("distance");
+  let distance_value = document.getElementById("distance_value");
+  let time = document.getElementById("time");
+  let time_value = document.getElementById("time_value");
+
+  //Funkcija ātrumam
+  speed_value.innerHTML = speed.value;
+  speed.oninput = function() {
+    speed_value.innerHTML = this.value;
+  }
+  //Funkcija distancei
+  distance_value.innerHTML = distance.value;
+  distance.oninput = function() {
+    distance_value.innerHTML = this.value;
+  }
+  //Funkcija laikam
+  time_value.innerHTML = time.value;
+  time.oninput = function() {
+    time_value.innerHTML = this.value;
+  }
+  function speed_check() {
+    document.getElementById("speed").disabled = true;
+    document.getElementById("distance").disabled = false;
+    document.getElementById("time").disabled = false;
+    let v = document.getElementById("speed").value;
+    
+  }
+
+  function distance_check() {
+    document.getElementById("speed").disabled = false;
+    document.getElementById("distance").disabled = true;
+    document.getElementById("time").disabled = false;
+    let s = document.getElementById("distance").value;
+    
+  }
+
+  function time_check() {
+    document.getElementById("speed").disabled = false;
+    document.getElementById("distance").disabled = false;
+    document.getElementById("time").disabled = true;
+    let t = document.getElementById("time").value;
+   
+  }
+  //v=s/t
+  //s=v*t
+  //t=s/v
+  // function speed_change() {
+  //}
+  //   param = document.getElementById("distance").disabled;
+  //   if param = true {
+  //     alert("test")
+
+  let s = document.getElementById("distance").value;
+
+  document.getElementById('speed').addEventListener('change', function (e) {
+    document.getElementById('time').value = document.getElementById("distance").value/e.target.value
+    time_value.innerHTML = document.getElementById("time").value
+    document.getElementById("distance").value = document.getElementById("distance").value
+  })
+
+  document.getElementById('time').addEventListener('change', function (e) {
+    document.getElementById('speed').value = document.getElementById("distance").value/e.target.value
+    speed_value.innerHTML = document.getElementById("speed").value
+    document.getElementById("distance").value = document.getElementById("distance").value
+  })
+
+  document.getElementById('distance').addEventListener('change', function (e) {
+    document.getElementById('time').value = e.target.value/document.getElementById("speed").value
+    time_value.innerHTML = document.getElementById("time").value
+  })
+
+  document.getElementById('time').addEventListener('change', function (e) {
+    document.getElementById('distance').value = e.target.value*document.getElementById("speed").value
+    distance_value.innerHTML = document.getElementById("distance").value
+  })
+
+  document.getElementById('speed').addEventListener('change', function (e) {
+    document.getElementById('distance').value = e.target.value*document.getElementById("time").value
+    distance_value.innerHTML = document.getElementById("distance").value
+  })
+
+  document.getElementById('distance').addEventListener('change', function (e) {
+    document.getElementById('speed').value = e.target.value/document.getElementById("time").value
+    speed_value.innerHTML = document.getElementById("speed").value
+  })
+
+  function graph() {
+    let c = document.getElementById("myCanvas");
+    let ctx = c.getContext("2d");
+    let v = speed_value.innerHTML
+    let t = time_value.innerHTML
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(v, t);
+    ctx.stroke();
+  }
+  </script>
+</html>
